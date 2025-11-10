@@ -1,0 +1,19 @@
+[project]
+name = "analytics-project"
+version = "0.1.0"
+description = "Final project for analytics course"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "nbformat>=5.10.4",
+    "openpyxl>=3.1.5",
+    "plotly>=6.4.0",
+    "scikit-learn>=1.7.2",
+    "setuptools>=80.9.0",
+    "xgboost>=3.1.1",
+    "ydata-profiling>=4.17.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["*"]

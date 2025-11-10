@@ -1,13 +1,47 @@
-2025-11-10 16:39:48,529 - __main__ - INFO - ================================================================================
-2025-11-10 16:39:48,529 - __main__ - INFO - COMPARACION DE MODELOS CON PYCARET (AutoML)
-2025-11-10 16:39:48,529 - __main__ - INFO - ================================================================================
-2025-11-10 16:39:48,529 - __main__ - ERROR - PyCaret no está instalado. Instala con: uv pip install pycaret
-2025-11-10 16:39:48,529 - __main__ - ERROR - 
- Error durante la ejecución: No module named 'pycaret'
-Traceback (most recent call last):
-  File "/Users/juanse/Documents/AI/analytics-project/src/models/pycaret_comparison.py", line 233, in main
-    results = run_pycaret_comparison(
-              ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/juanse/Documents/AI/analytics-project/src/models/pycaret_comparison.py", line 27, in run_pycaret_comparison
-    from pycaret.classification import (
-ModuleNotFoundError: No module named 'pycaret'
+2025-11-10 18:07:37,516 - __main__ - INFO - ================================================================================
+2025-11-10 18:07:37,516 - __main__ - INFO - COMPARACION DE MODELOS CON PYCARET (AutoML)
+2025-11-10 18:07:37,516 - __main__ - INFO - ================================================================================
+2025-11-10 18:07:37,516 - __main__ - INFO - 
+================================================================================
+2025-11-10 18:07:37,516 - __main__ - INFO - INICIANDO ANALISIS CON PYCARET (AutoML)
+2025-11-10 18:07:37,516 - __main__ - INFO - ================================================================================
+2025-11-10 18:07:37,516 - __main__ - INFO - 
+>>> Cargando datos procesados...
+2025-11-10 18:07:37,537 - __main__ - INFO - Train set: (8101, 29), Test set: (2026, 29)
+2025-11-10 18:07:37,537 - __main__ - INFO - 
+>>> Configurando PyCaret...
+2025-11-10 18:07:37,537 - __main__ - INFO -   Métrica de optimización: AUC
+2025-11-10 18:07:37,795 - __main__ - INFO -   Modelos a comparar: ['svm', 'rf', 'ada', 'lr', 'gbc', 'lightgbm', 'dt', 'knn']
+2025-11-10 18:07:37,795 - __main__ - INFO - 
+>>> Comparando 8 modelos...
+2025-11-10 18:07:37,795 - __main__ - INFO -   Seleccionando top 5 modelos
+2025-11-10 18:07:48,171 - __main__ - INFO - 
+>>> Tuneando el mejor modelo...
+2025-11-10 18:08:02,285 - __main__ - INFO - Modelo tuneado exitosamente
+2025-11-10 18:08:02,286 - __main__ - INFO - 
+>>> Evaluando en conjunto de test...
+2025-11-10 18:08:02,335 - __main__ - INFO - 
+>>> Guardando resultados...
+2025-11-10 18:08:02,338 - __main__ - INFO - Comparación guardada en: reports/pycaret/model_comparison.csv
+2025-11-10 18:08:02,338 - __main__ - INFO - Métricas finales guardadas en: reports/pycaret/final_metrics.csv
+2025-11-10 18:08:02,373 - __main__ - INFO - Modelo guardado en: trained_models/pycaret/best_model.pkl
+2025-11-10 18:08:02,373 - __main__ - INFO - 
+>>> Generando visualizaciones...
+2025-11-10 18:08:03,401 - __main__ - INFO -   ✓ Curva AUC generada
+2025-11-10 18:08:03,508 - __main__ - INFO -   ✓ Matriz de confusión generada
+2025-11-10 18:08:03,605 - __main__ - INFO -   ✓ Feature importance generada
+2025-11-10 18:08:03,605 - __main__ - INFO - 
+NOTA: Las figuras se guardan en el directorio actual con nombres automáticos
+2025-11-10 18:08:03,605 - __main__ - INFO -       Muévelas manualmente a reports/pycaret/ si lo deseas
+2025-11-10 18:08:03,605 - __main__ - INFO - 
+================================================================================
+2025-11-10 18:08:03,605 - __main__ - INFO - ANALISIS CON PYCARET COMPLETADO
+2025-11-10 18:08:03,605 - __main__ - INFO - ================================================================================
+2025-11-10 18:08:03,605 - __main__ - INFO - 
+ Proceso completado exitosamente
+2025-11-10 18:08:03,605 - __main__ - INFO - 
+ARCHIVOS GENERADOS:
+2025-11-10 18:08:03,605 - __main__ - INFO -   - reports/pycaret/model_comparison.csv
+2025-11-10 18:08:03,605 - __main__ - INFO -   - reports/pycaret/final_metrics.csv
+2025-11-10 18:08:03,605 - __main__ - INFO -   - trained_models/pycaret/best_model.pkl
+2025-11-10 18:08:03,605 - __main__ - INFO -   - Figuras en directorio actual (*.png)

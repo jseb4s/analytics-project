@@ -2,30 +2,10 @@ import logging
 from pathlib import Path
 from typing import Optional
 
+from utils.logger_config import setup_logger
 from utils.data_loader import load_bank_churn_data
 from preprocessing.pipeline import BankChurnPreprocessor, save_processed_data
 from models.train import train_all_models
-
-
-def setup_logging(log_file: Optional[str] = None) -> None:
-    """
-    Configura el sistema de logging.
-    
-    Args:
-        log_file: Ruta al archivo de log (opcional)
-    """
-    handlers = [logging.StreamHandler()]
-    
-    if log_file:
-        log_path = Path(log_file)
-        log_path.parent.mkdir(parents=True, exist_ok=True)
-        handlers.append(logging.FileHandler(log_file))
-    
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        handlers=handlers
-    )
 
 
 def run_preprocessing(categorical_cols: Optional[list] = None) -> bool:
@@ -69,8 +49,8 @@ def run_preprocessing(categorical_cols: Optional[list] = None) -> bool:
         
         # Guardar scaler
         logger.info("\n>>> Guardando scaler...")
-        scaler_path = Path("trained_models/preprocessing/scaler.pkl")
-        preprocessor.save_scaler(str(scaler_path))
+        scaler_path = "trained_models/preprocessing/scaler.pkl"
+        preprocessor.save_scaler(scaler_path)
         
         logger.info("\nPREPROCESAMIENTO COMPLETADO EXITOSAMENTE")
         return True
@@ -125,9 +105,9 @@ def main():
     """
     Funcipn principal que ejecuta el pipeline completo.
     """
-    # logging
+    # configurar logging - sobrescribe el log en cada ejecucion
     log_file = "logs/main_pipeline.log"
-    setup_logging(log_file)
+    setup_logger(name=__name__, level=logging.INFO, log_file=log_file, mode='w')
     
     logger = logging.getLogger(__name__)
     
@@ -164,9 +144,9 @@ def main():
     # informacion de archivos generados
     logger.info("\nARCHIVOS GENERADOS:")
     logger.info("   Datos procesados: data/processed/")
-    logger.info("   Modelos entrenados: models/")
+    logger.info("   Modelos entrenados: trained_models/")
     logger.info("   Figuras: reports/figures/")
-    logger.info("   Comparación: models/model_comparison.csv")
+    logger.info("   Comparación: trained_models/model_comparison.csv")
     logger.info(f"   Log completo: {log_file}")
     
     return True
@@ -179,7 +159,7 @@ if __name__ == "__main__":
     
     if success:
         print("\nPipeline ejecutado exitosamente")
-        print("Ver resultados en models/model_comparison.csv")
+        print("Ver resultados en trained_models/model_comparison.csv")
         sys.exit(0)
     else:
         print("\nPipeline fallo - revisa los logs para más detalles")

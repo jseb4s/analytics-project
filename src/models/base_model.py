@@ -239,8 +239,7 @@ def load_processed_data(data_dir: Optional[Path] = None) -> Tuple[pd.DataFrame, 
         Tupla (X_train, X_test, y_train, y_test)
     """
     if data_dir is None:
-        project_root = Path(__file__).parent.parent.parent
-        data_dir = project_root / "data" / "processed"
+        data_dir = Path("data/processed")
     
     short_path = "/".join(data_dir.parts[-2:])
     logger.info(f"Cargando datos procesados desde: {short_path}")

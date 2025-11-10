@@ -93,8 +93,7 @@ def train_all_models(save_models: bool = True,
         
         # Guardar comparacion
         if save_models:
-            project_root = Path(__file__).parent.parent.parent
-            comparison_path = project_root / "trained_models" / "model_comparison.csv"
+            comparison_path = Path("trained_models/model_comparison.csv")
             comparison_path.parent.mkdir(parents=True, exist_ok=True)
             comparison_df.to_csv(comparison_path, index=False)
             short_c_path = "/".join(comparison_path.parts[-2:])

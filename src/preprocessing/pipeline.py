@@ -123,9 +123,11 @@ class BankChurnPreprocessor:
         Args:
             filepath: Ruta donde guardar el scaler
         """
-        Path(filepath).parent.mkdir(parents=True, exist_ok=True)
-        joblib.dump(self.scaler, filepath)
-        logger.info(f"Scaler guardado en: {filepath}")
+        scaler_path = Path(filepath)
+        scaler_path.parent.mkdir(parents=True, exist_ok=True)
+        joblib.dump(self.scaler, scaler_path)
+        short_path = "/".join(scaler_path.parts[-3:])
+        logger.info(f"Scaler guardado en: {short_path}")
     
     def load_scaler(self, filepath: str) -> None:
         """
@@ -134,8 +136,10 @@ class BankChurnPreprocessor:
         Args:
             filepath: Ruta del scaler guardado
         """
-        self.scaler = joblib.load(filepath)
-        logger.info(f"Scaler cargado desde: {filepath}")
+        scaler_path = Path(filepath)
+        self.scaler = joblib.load(scaler_path)
+        short_path = "/".join(scaler_path.parts[-3:])
+        logger.info(f"Scaler cargado desde: {short_path}")
     
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         """
@@ -169,8 +173,7 @@ def save_processed_data(X_train: pd.DataFrame,
         output_dir: Directorio de salida (default: data/processed/)
     """
     if output_dir is None:
-        project_root = Path(__file__).parent.parent.parent
-        output_dir = project_root / "data" / "processed"
+        output_dir = Path("data/processed")
     
     output_dir.mkdir(parents=True, exist_ok=True)
     
@@ -180,7 +183,8 @@ def save_processed_data(X_train: pd.DataFrame,
     y_train.to_csv(output_dir / "y_train.csv", index=False, header=True)
     y_test.to_csv(output_dir / "y_test.csv", index=False, header=True)
     
-    logger.info(f"Datos procesados guardados en: {output_dir}")
+    short_path = "/".join(output_dir.parts[-2:])
+    logger.info(f"Datos procesados guardados en: {short_path}")
     logger.info(f"  - X_train.csv: {X_train.shape}")
     logger.info(f"  - X_test.csv: {X_test.shape}")
     logger.info(f"  - y_train.csv: {y_train.shape}")

@@ -156,10 +156,9 @@ def train_neural_network(save_model: bool = True,
     X_train, X_test, y_train, y_test = load_processed_data()
     
     # paths
-    project_root = Path(__file__).parent.parent.parent
-    model_path = project_root / "trained_models" / "neural_network" / "nn_model.pkl"
-    results_path = project_root / "reports" / "figures" / "neural_network" / "nn_results.png"
-    history_path = project_root / "reports" / "figures" / "neural_network" / "nn_training_history.png"
+    model_path = Path("trained_models/neural_network/nn_model.pkl")
+    results_path = Path("reports/figures/neural_network/nn_results.png")
+    history_path = Path("reports/figures/neural_network/nn_training_history.png")
     
     # entrenar
     logger.info("\n" + "="*60)

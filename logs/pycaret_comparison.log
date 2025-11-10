@@ -1,0 +1,13 @@
+2025-11-10 16:39:48,529 - __main__ - INFO - ================================================================================
+2025-11-10 16:39:48,529 - __main__ - INFO - COMPARACION DE MODELOS CON PYCARET (AutoML)
+2025-11-10 16:39:48,529 - __main__ - INFO - ================================================================================
+2025-11-10 16:39:48,529 - __main__ - ERROR - PyCaret no está instalado. Instala con: uv pip install pycaret
+2025-11-10 16:39:48,529 - __main__ - ERROR - 
+ Error durante la ejecución: No module named 'pycaret'
+Traceback (most recent call last):
+  File "/Users/juanse/Documents/AI/analytics-project/src/models/pycaret_comparison.py", line 233, in main
+    results = run_pycaret_comparison(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/juanse/Documents/AI/analytics-project/src/models/pycaret_comparison.py", line 27, in run_pycaret_comparison
+    from pycaret.classification import (
+ModuleNotFoundError: No module named 'pycaret'

@@ -43,9 +43,8 @@ def train_random_forest(save_model: bool = True,
     X_train, X_test, y_train, y_test = load_processed_data()
     
     # paths
-    project_root = Path(__file__).parent.parent.parent
-    model_path = project_root / "trained_models" / "random_forest" / "rf_model.pkl"
-    figure_path = project_root / "reports" / "figures" / "random_forest" / "rf_results.png"
+    model_path = Path("trained_models/random_forest/rf_model.pkl")
+    figure_path = Path("reports/figures/random_forest/rf_results.png")
     
     # entrenar
     logger.info("\n" + "="*60)

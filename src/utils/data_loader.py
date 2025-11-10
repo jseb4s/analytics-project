@@ -28,9 +28,7 @@ def load_bank_churn_data(
         >>> df = load_bank_churn_data("otro_archivo.xlsx")
     """
     if data_dir is None:
-        # bbtener el directorio raiz del proyecto (2 niveles arriba de src/utils)
-        project_root = Path(__file__).parent.parent.parent
-        data_dir = project_root / "data" / "raw"
+        data_dir = Path("data/raw")
     
     file_path = data_dir / filename
     
@@ -41,14 +39,15 @@ def load_bank_churn_data(
             f"Asegúrate de que el archivo existe en {data_dir}"
         )
     
-    logger.info(f"Cargando datos desde: {file_path}")
+    short_path = "/".join(file_path.parts[-3:])
+    logger.info(f"Cargando datos desde: {short_path}")
     
     try:
         df = pd.read_excel(file_path)
         logger.info(f"Datos cargados exitosamente: {df.shape[0]} filas, {df.shape[1]} columnas")
         return df
     except Exception as e:
-        logger.error(f"Error al cargar el archivo {file_path}: {str(e)}")
+        logger.error(f"Error al cargar el archivo {short_path}: {str(e)}")
         raise
 
 
@@ -66,14 +65,14 @@ def load_processed_data(filename: str) -> pd.DataFrame:
         FileNotFoundError: Si el archivo no existe
         ValueError: Si el formato de archivo no es soportado
     """
-    project_root = Path(__file__).parent.parent.parent
-    file_path = project_root / "data" / "processed" / filename
+    file_path = Path("data/processed") / filename
     
     if not file_path.exists():
         logger.error(f"Archivo procesado no encontrado: {file_path}")
         raise FileNotFoundError(f"No se encontró el archivo: {file_path}")
     
-    logger.info(f"Cargando datos procesados desde: {file_path}")
+    short_path = "/".join(file_path.parts[-3:])
+    logger.info(f"Cargando datos procesados desde: {short_path}")
     
     try:
         # detectar el tipo de archivo y cargar apropiadamente
@@ -106,13 +105,13 @@ def save_processed_data(df: pd.DataFrame, filename: str) -> None:
     Raises:
         ValueError: Si el formato de archivo no es soportado
     """
-    project_root = Path(__file__).parent.parent.parent
-    processed_dir = project_root / "data" / "processed"
+    processed_dir = Path("data/processed")
     processed_dir.mkdir(parents=True, exist_ok=True)
     
     file_path = processed_dir / filename
     
-    logger.info(f"Guardando datos procesados en: {file_path}")
+    short_path = "/".join(file_path.parts[-3:])
+    logger.info(f"Guardando datos procesados en: {short_path}")
     logger.debug(f"Shape del DataFrame: {df.shape}")
     
     try:
@@ -126,7 +125,7 @@ def save_processed_data(df: pd.DataFrame, filename: str) -> None:
             logger.error(f"Formato de archivo no soportado: {filename}")
             raise ValueError(f"Formato de archivo no soportado: {filename}")
         
-        logger.info(f"Datos guardados exitosamente: {file_path}")
+        logger.info(f"Datos guardados exitosamente: {short_path}")
         
     except Exception as e:
         logger.error(f"Error al guardar datos: {str(e)}")

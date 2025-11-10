@@ -8,7 +8,8 @@ def setup_logger(
     name: Optional[str] = None,
     level: int = logging.INFO,
     log_file: Optional[str] = None,
-    format_string: Optional[str] = None
+    format_string: Optional[str] = None,
+    mode: str = 'a'
 ) -> logging.Logger:
     """
     Configura y retorna un logger.
@@ -18,12 +19,13 @@ def setup_logger(
         level: Nivel de logging (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         log_file: Path al archivo de log. Si es None, solo imprime en consola
         format_string: Formato personalizado para los logs
+        mode: Modo de escritura ('a' = append, 'w' = overwrite)
         
     Returns:
         Logger configurado
         
     Example:
-        >>> logger = setup_logger(__name__, level=logging.DEBUG)
+        >>> logger = setup_logger(__name__, level=logging.DEBUG, mode='w')
         >>> logger.info("Proceso iniciado")
     """
     # formato por defecto
@@ -53,7 +55,7 @@ def setup_logger(
         log_path = Path(log_file)
         log_path.parent.mkdir(parents=True, exist_ok=True)
         
-        file_handler = logging.FileHandler(log_file, encoding='utf-8')
+        file_handler = logging.FileHandler(log_file, mode=mode, encoding='utf-8')
         file_handler.setLevel(level)
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
@@ -74,8 +76,7 @@ def get_project_logger(module_name: str) -> logging.Logger:
     Example:
         >>> logger = get_project_logger(__name__)
     """
-    project_root = Path(__file__).parent.parent.parent
-    log_file = project_root / "logs" / "analytics.log"
+    log_file = Path("logs/analytics.log")
     
     return setup_logger(
         name=module_name,

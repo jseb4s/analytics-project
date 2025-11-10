@@ -43,9 +43,8 @@ def train_gradient_boosting(save_model: bool = True,
     """
     X_train, X_test, y_train, y_test = load_processed_data()
     
-    project_root = Path(__file__).parent.parent.parent
-    model_path = project_root / "trained_models" / "gradient_boosting" / "gb_model.pkl"
-    figure_path = project_root / "reports" / "figures" / "gradient_boosting" / "gb_results.png"
+    model_path = Path("trained_models/gradient_boosting/gb_model.pkl")
+    figure_path = Path("reports/figures/gradient_boosting/gb_results.png")
     
     logger.info("\n" + "="*60)
     logger.info("ENTRENANDO GRADIENT BOOSTING")

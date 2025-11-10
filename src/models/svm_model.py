@@ -131,9 +131,8 @@ def train_svm_models(save_models: bool = True,
     X_train, X_test, y_train, y_test = load_processed_data()
     
     # Paths para guardar
-    project_root = Path(__file__).parent.parent.parent
-    models_dir = project_root / "trained_models" / "svm"
-    figures_dir = project_root / "reports" / "figures" / "svm"
+    models_dir = Path("trained_models/svm")
+    figures_dir = Path("reports/figures/svm")
     
     results = {}
     

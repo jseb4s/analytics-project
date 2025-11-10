@@ -55,15 +55,15 @@ def encode_categorical_variables(df: pd.DataFrame,
                                  categorical_cols: List[str],
                                  drop_first: bool = True) -> pd.DataFrame:
     """
-    Aplica one-hot encoding a las variables categóricas.
+    Aplica one-hot encoding a las variables categoricas.
     
     Args:
         df: DataFrame original
-        categorical_cols: Lista de columnas categóricas a codificar
-        drop_first: Si True, elimina la primera categoría para evitar multicolinealidad
+        categorical_cols: Lista de columnas categoricas a codificar
+        drop_first: Si True, elimina la primera categoria para evitar multicolinealidad
         
     Returns:
-        DataFrame con las variables categóricas codificadas
+        DataFrame con las variables categoricas codificadas
     """
     logger.info(f"Aplicando one-hot encoding a: {categorical_cols}")
     
@@ -76,7 +76,7 @@ def encode_categorical_variables(df: pd.DataFrame,
     
     df_encoded = pd.get_dummies(df, columns=existing_cols, drop_first=drop_first)
     
-    logger.info(f"Shape después de encoding: {df_encoded.shape}")
+    logger.info(f"Shape despues de encoding: {df_encoded.shape}")
     logger.info(f"Nuevas columnas creadas: {df_encoded.shape[1] - df.shape[1]}")
     
     return df_encoded

@@ -61,30 +61,30 @@ class BankChurnPreprocessor:
         logger.info("=== Iniciando preprocesamiento ===")
         logger.info(f"Shape inicial: {df.shape}")
         
-        # 1. Eliminar columnas
+        # eliminar columnas
         df_processed = df.drop(columns=self.columns_to_drop)
         logger.info(f"Columnas eliminadas: {self.columns_to_drop}")
         
-        # 2. Crear variable objetivo
+        # crear variable objetivo
         df_processed['churn'] = (df_processed['attrition_flag'] == 'Attrited Customer').astype(int)
         df_processed = df_processed.drop('attrition_flag', axis=1)
         
         churn_rate = (df_processed['churn'].sum() / len(df_processed)) * 100
         logger.info(f"Tasa de churn: {churn_rate:.2f}%")
         
-        # 3. One-hot encoding
+        # one-hot encoding
         if self.categorical_cols:
             existing_cats = [col for col in self.categorical_cols if col in df_processed.columns]
             df_processed = pd.get_dummies(df_processed, columns=existing_cats, drop_first=True)
             logger.info(f"One-hot encoding aplicado a: {existing_cats}")
         
-        # 4. Separar X e y
+        # separar X e y
         y = df_processed['churn']
         X = df_processed.drop(columns=['churn'])
         
         logger.info(f"Features (X): {X.shape}, Target (y): {y.shape}")
         
-        # 5. Train-test split
+        # train-test split
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=test_size, random_state=random_state, stratify=y
         )
@@ -93,11 +93,11 @@ class BankChurnPreprocessor:
         logger.info(f"Train churn rate: {(y_train.sum()/len(y_train)*100):.2f}%")
         logger.info(f"Test churn rate: {(y_test.sum()/len(y_test)*100):.2f}%")
         
-        # 6. Estandarizar columnas numéricas
+        # estandarizar columnas numéricas
         X_train_scaled = X_train.copy()
         X_test_scaled = X_test.copy()
         
-        # Verificar qué columnas numéricas existen
+        # verificar que columnas numericas existen
         existing_numerical = [col for col in self.numerical_cols if col in X_train.columns]
         missing_numerical = [col for col in self.numerical_cols if col not in X_train.columns]
         
@@ -109,7 +109,7 @@ class BankChurnPreprocessor:
             X_train_scaled[existing_numerical] = self.scaler.fit_transform(X_train[existing_numerical])
             X_test_scaled[existing_numerical] = self.scaler.transform(X_test[existing_numerical])
         
-        # Guardar nombres de features
+        # guardar nombres de features
         self.feature_names = X_train_scaled.columns.tolist()
         
         logger.info("=== Preprocesamiento completado ===")
@@ -139,7 +139,7 @@ class BankChurnPreprocessor:
     
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         """
-        Aplica la transformación a nuevos datos (solo estandarización).
+        Aplica la transformacion a nuevos datos (solo estandarizacion).
         
         Args:
             X: DataFrame con features
@@ -174,7 +174,7 @@ def save_processed_data(X_train: pd.DataFrame,
     
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Guardar datasets
+    # guardar datasets
     X_train.to_csv(output_dir / "X_train.csv", index=False)
     X_test.to_csv(output_dir / "X_test.csv", index=False)
     y_train.to_csv(output_dir / "y_train.csv", index=False, header=True)

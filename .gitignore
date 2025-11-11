@@ -6,7 +6,24 @@ dist/
 wheels/
 *.egg-info
 
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# OS específico
+.DS_Store        
+.DS_Store?
+
+# Python version managers
+.python-version
+
+# Package managers
+uv.lock           
+poetry.lock
+Pipfile.lock
+
 # Virtual environments
 .venv
 
+# Variables
 *.env

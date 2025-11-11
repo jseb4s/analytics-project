@@ -89,7 +89,7 @@ analytics-project/
 ├── logs/                             # Logs de ejecución
 │   └── main_pipeline.log
 │
-├── main.py                           # 🚀 Script principal
+├── main.py                           # Script principal
 ├── pyproject.toml                    # Configuración del proyecto
 ├── .gitignore
 └── README.md
@@ -102,7 +102,7 @@ analytics-project/
 ### Requisitos Previos
 
 - Python 3.12+
-- `uv` (gestor de paquetes) o `pip`
+- `uv` (gestor de paquetes)
 
 ### 1. Clonar el repositorio
 

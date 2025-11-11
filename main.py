@@ -1,6 +1,3 @@
-"""
-Pipeline principal para analisis con PyCaret (AutoML)
-"""
 import logging
 from pathlib import Path
 from typing import Optional

@@ -540,7 +540,7 @@ mv models trained_models
 
 ##  Autor
 
-Karen Viviana Duque Angarita
+Juan Sebastian Moncada Aguilar
 
 ---
 
